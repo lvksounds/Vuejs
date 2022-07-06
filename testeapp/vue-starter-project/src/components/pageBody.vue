@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
-    <p>{{ input_name }}</p>
-    <input type="text" v-model="input_name" placeholder="Insira se nome aqui">
-    <input type="submit" value="Enviar" v-on:click="submitForm">
+    <input type="text" v-model="input_data">
+    <button v-on:click="enviaDados" value="enviar">Enviar</button>
+    <p>{{ name }}</p>
   </div>
 </template>
 
@@ -12,17 +12,17 @@ export default {
   props: {
     msg: String
   },
-  data() {
+  data () {
     return {
       name: "",
-      input_name:"" 
+      input_data: "",
     }
   },
   methods: {
-    submitForm(e) {
-      e.preventDefault();
-
-      this.name = this.input_name
+    enviaDados(event){
+      event.preventDefault(); 
+      
+      this.name = this.input_data
     }
   }
 }
