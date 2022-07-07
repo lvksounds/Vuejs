@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="todo-container"
-    class="flex flex-col container w-96 h-96 m-auto mt-20 rounded-lg font-ubuntu font-medium shadow-xl"
-  >
+  <section>
     <div id="header-container" class="flex flex-row justify-between m-3">
       <div id="titulo" class="flex flex-row">
         <h1 class="text-2xl">
@@ -24,66 +21,43 @@
         >
       </div>
     </div>
-
     <div id="container-tarefas" class="m-3 flex flex-row justify-between">
       <input
         id=""
         type="text"
-        class="border rounded-sm h-10 w-2/3 focus:ring-0 focus:border-0 focus:outline-indigo-500 p-2"
+        class="border rounded-sm h-10 w-full focus:ring-0 focus:border-0 focus:outline-indigo-500 p-2"
         placeholder="New task"
-        v-model="task_text"
+        v-model="inputText"
       />
       <button
         class="border border-indigo-500 hover:bg-indigo-500 hover:text-indigo-50 w-14 h-10 rounded-sm"
-        v-on:click="addTask"
+        @click="addTask"
       >
         +
       </button>
     </div>
     <hr />
-    <div id="container-newtasks" class="m-3 flex flex-col">
-      <div
-        id="task"
-        class="flex flex-row justify-between border-b border-indigo-500 p-2"
-      >
-        <p id="task-text">{{ new_task }}</p>
-        <div id="task-buttons" class="flex flex-row">
-          <CheckIcon class="h-5/6 w-6" id="delBtn" />
-          <TrashIcon class="h-5/6 w-5" id="chkBtn" />
-        </div>
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
-import { CheckIcon } from "@heroicons/vue/solid";
-import { TrashIcon } from "@heroicons/vue/solid";
 import { BadgeCheckIcon } from "@heroicons/vue/outline";
+
 export default {
-  name: "todoApp",
-  components: { CheckIcon, TrashIcon, BadgeCheckIcon },
+  name: "ParteSuperior",
+  components: { BadgeCheckIcon },
   data() {
     return {
-      task_text: "",
-      new_task: "",
+      inputText: "",
     };
   },
   methods: {
     addTask() {
-      this.new_task = this.task_text;
+      if (this.inputText) {
+        this.$emit("addTask", this.inputText);
+        this.inputText = "";
+      }
     },
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-input {
-  width: 100%;
-}
-svg {
-  margin-left: 10px;
-  width: 25px;
-}
-</style>
