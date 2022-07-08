@@ -3,8 +3,8 @@
     id="todo-container"
     class="flex flex-col container w-96 m-auto mt-20 rounded-lg font-ubuntu font-medium shadow-xl"
   >
-    <ParteSuperior @add-task="taskUpdate" @show-done-tasks="setTaskDone" />
-    <ParteInferior :task-list="tasks" :filter-tasks="donedTask" />
+    <ParteSuperior @add-task="taskUpdate" @filter="applyFilter" />
+    <ParteInferior :new-task="task" :show-filter="taskFilter" />
   </div>
 </template>
 
@@ -17,23 +17,16 @@ export default {
   components: { ParteInferior, ParteSuperior },
   data() {
     return {
-      tasks: new Array(),
-      taskNum: 0,
-      donedTask: Boolean,
+      task: "",
+      taskFilter: "all",
     };
   },
   methods: {
     taskUpdate(newTask) {
-      this.tasks.unshift({
-        index: this.taskNum,
-        value: newTask,
-        done: false,
-        deleted: false,
-      });
-      this.taskNum++;
+      this.task = newTask;
     },
-    setTaskDone() {
-      this.donedTask = true;
+    applyFilter(newFilter) {
+      this.taskFilter = newFilter;
     },
   },
 };

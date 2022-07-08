@@ -1,9 +1,9 @@
 <template>
   <div id="container-newtasks" class="m-3 flex flex-col">
-    <div v-for="task in taskList" :key="task.index">
+    <div v-for="task in filterTasks" :key="task.index">
       <div
         id="tasks"
-        class="flex flex-row justify-between border-b border-indigo-500 p-2"
+        class="flex flex-row justify-between border-b border-indigo-800 p-2"
         v-if="!task.deleted"
       >
         <p id="task-text" :class="{ 'line-through': task.done }">
@@ -28,15 +28,46 @@ import { CheckIcon, TrashIcon, XIcon } from "@heroicons/vue/solid";
 export default {
   name: "ParteInferior",
   props: {
-    taskList: Array,
-    filterTasks: Boolean,
+    newTask: String,
+    showFilter: {
+      type: String,
+      default: "all",
+    },
+  },
+  data() {
+    return {
+      taskIndex: 0,
+      tasks: [],
+    };
   },
   components: { CheckIcon, TrashIcon, XIcon },
+
   computed: {
-    showOnlyDoneTasks() {
-      return this.filterTasks
-        ? this.taskList.filter((task) => task.done)
-        : this.taskList;
+    doneTasks() {
+      return this.tasks.filter((task) => task.done);
+    },
+    undoneTasks() {
+      return this.tasks.filter((task) => !task.done);
+    },
+    filterTasks() {
+      if (this.showFilter === "all") {
+        return this.tasks;
+      } else if (this.showFilter === "done") {
+        return this.doneTasks;
+      } else {
+        return this.undoneTasks;
+      }
+    },
+  },
+  watch: {
+    newTask(newValue) {
+      this.tasks.push({
+        index: this.taskIndex,
+        value: newValue,
+        done: false,
+        deleted: false,
+      });
+      this.taskIndex++;
     },
   },
 };
