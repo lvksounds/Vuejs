@@ -32,7 +32,6 @@
     </div>
     <div id="container-tarefas" class="m-3 flex flex-row justify-between">
       <input
-        id=""
         type="text"
         class="border rounded-sm h-10 w-full focus:ring-0 focus:border focus:outline-1 focus:outline-indigo-500 p-2"
         placeholder="New task"
