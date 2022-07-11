@@ -3,10 +3,14 @@
     <div v-for="task in filterTasks" :key="task.index">
       <div
         id="tasks"
-        class="flex flex-row justify-between border-b border-indigo-800 p-2"
+        class="flex flex-row justify-between p-2"
         v-if="!task.deleted"
       >
-        <p id="task-text" :class="{ 'line-through': task.done }">
+        <p
+          id="task-text"
+          class="text-sm"
+          :class="{ 'line-through': task.done }"
+        >
           {{ task.value }}
         </p>
         <div id="task-buttons" class="flex flex-row">
@@ -61,7 +65,7 @@ export default {
   },
   watch: {
     newTask(newValue) {
-      this.tasks.push({
+      this.tasks.unshift({
         index: this.taskIndex,
         value: newValue,
         done: false,
