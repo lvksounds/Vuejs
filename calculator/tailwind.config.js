@@ -1,0 +1,17 @@
+/** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require("tailwindcss/defaultTheme");
+module.exports = {
+  content: ["./public/**/*.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        fontFamily: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        purple: {
+          1: "#252830",
+        },
+      },
+    },
+  },
+  plugins: [],
+};
