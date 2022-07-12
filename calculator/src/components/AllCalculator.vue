@@ -10,19 +10,19 @@
         <button class="h-16 w-16">+/-</button>
         <button class="h-16 w-16">%</button>
         <button class="bg-zinc-400 rounded-full h-16 w-16">÷</button>
-        <button @click="setValue" id="num" class="h-16 w-16">7</button>
-        <button @click="setValue" id="num" class="h-16 w-16">8</button>
-        <button @click="setValue" id="num" class="h-16 w-16">9</button>
+        <button @click="setValue('1')" id="num" class="h-16 w-16">7</button>
+        <button @click="setValue('2')" id="num" class="h-16 w-16">8</button>
+        <button @click="setValue('3')" id="num" class="h-16 w-16">9</button>
         <button class="bg-zinc-400 rounded-full h-16 w-16">x</button>
-        <button @click="setValue" id="num" class="h-16 w-16">4</button>
-        <button @click="setValue" id="num" class="h-16 w-16">5</button>
-        <button @click="setValue" id="num" class="h-16 w-16">6</button>
+        <button @click="setValue('4')" id="num" class="h-16 w-16">4</button>
+        <button @click="setValue('5')" id="num" class="h-16 w-16">5</button>
+        <button @click="setValue('6')" id="num" class="h-16 w-16">6</button>
         <button class="bg-zinc-400 rounded-full h-16 w-16">-</button>
-        <button @click="setValue" id="num" class="h-16 w-16">1</button>
-        <button @click="setValue" id="num" class="h-16 w-16">2</button>
-        <button @click="setValue" id="num" class="h-16 w-16">3</button>
+        <button @click="setValue('7')" id="num" class="h-16 w-16">1</button>
+        <button @click="setValue('8')" id="num" class="h-16 w-16">2</button>
+        <button @click="setValue('9')" id="num" class="h-16 w-16">3</button>
         <button class="bg-zinc-400 rounded-full h-16 w-16">+</button>
-        <button @click="setValue" id="num" class="h-16 w-16">0</button>
+        <button @click="setValue('0')" id="num" class="h-16 w-16">0</button>
         <button class="h-16 w-16">.</button>
         <button class="col-start-4 bg-violet-500 rounded-full h-16 w-16">
           =
@@ -44,11 +44,15 @@ export default {
     };
   },
   methods: {
-    setValue(){
-      this.currentValue =
+    setValue(num) {
+      if (this.clickedOperator) {
+        this.currentValue = "";
+        this.clickedOperator = false;
+      }
+      this.currentValue = `${this.currentValue}${num}`;
     },
     clear() {
-      this.valorCorrente = "";
+      this.currentValue = "";
     },
   },
 };
